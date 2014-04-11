@@ -1,5 +1,7 @@
 import cgi, cgitb, sys, random
 
+#http://wedi.dy.fi/matte/noppa.py
+
 def enc_print(string='', koodaus='utf-8'):
   sys.stdout.buffer.write(string.encode(koodaus) + b'\n')
 

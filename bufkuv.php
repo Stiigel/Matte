@@ -1,13 +1,11 @@
 <?php
-
-
+// http://wedi.dy.fi/matte/bufkuv.php
 function kirjoita($kuva, $rivi, $teksti, $vari) {  
 
   for( $i = 0; $i < strlen("{$teksti}"); $i++) {
     imagechar($kuva, 5, $i * 10 + 30, $rivi, "{$teksti[$i]}", $vari);
   }
 }
-
 
 $lev = 500;
 $kor = 650;
@@ -20,6 +18,8 @@ $pun = imagecolorallocate($kuva, 100, 30, 29);
 $vih = imagecolorallocate($kuva, 20, 210, 190);
 $kel = imagecolorallocate($kuva, 250, 230, 19);
 $mus = imagecolorallocate($kuva, 1, 2, 4);
+$har = imagecolorallocate($kuva, 109, 112, 190);
+
 $lautLev = 80;
 
 $risteavat = 0;
@@ -57,6 +57,9 @@ for($i = 0; $i < $maara; $i++) {
   
 }
 
+imagerectangle($kuva, $tikkuPit, $tikkuPit, $lev - $tikkuPit, $lev - $tikkuPit, $har);
+// imagerectangle($kuva, 50, 50, 400, 400, $mus);
+
 $todnak = $risteavat / $maara;
 
 imagefilledrectangle($kuva, 0, $lev, $lev, $kor, $vih);
@@ -65,10 +68,6 @@ $kissa = "Olen kissojen kauhu";
 
 kirjoita($kuva, 550, "Risteavat tikut: {$risteavat}", $mus);
 kirjoita($kuva, 570, "Todennakoisyys: {$risteavat} / {$maara} =  {$todnak}", $mus);
-
-// for( $i = 0; $i < strlen("{$risteavat}"); $i++) {
-//   imagechar($kuva, 5, $i * 10 + 30, 600, "$risteavat", $mus);
-// }
 
 header("Content-Type:image/png");
 imagepng($kuva);
