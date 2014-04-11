@@ -1,15 +1,8 @@
 <?php
 // http://wedi.dy.fi/matte/bufkuv.php
-function kirjoita($kuva, $rivi, $teksti, $vari) {  
-
-  for( $i = 0; $i < strlen("{$teksti}"); $i++) {
-    imagechar($kuva, 5, $i * 10 + 30, $rivi, "{$teksti[$i]}", $vari);
-  }
-}
 
 $lev = 500;
 $kor = 650;
-
 $maara = 25;
 
 $kuva = imagecreate($lev, $kor);
@@ -20,9 +13,8 @@ $kel = imagecolorallocate($kuva, 250, 230, 19);
 $mus = imagecolorallocate($kuva, 1, 2, 4);
 $har = imagecolorallocate($kuva, 109, 112, 190);
 
-$lautLev = 80;
-
 $risteavat = 0;
+$lautLev = 80;
 $viivat = [];
 
 for($i = 0; $i < $lev/$lautLev; $i++) {
@@ -30,8 +22,7 @@ for($i = 0; $i < $lev/$lautLev; $i++) {
   imageline($kuva, 0, $i * $lautLev, $lev, $i * $lautLev, $pun);
 }
 
-for($i = 0; $i < $maara; $i++) {
-  
+for($i = 0; $i < $maara; $i++) {  
   $tikkuPit = $lautLev/2;
   $tikkuX = rand(0 + $tikkuPit, $lev - $tikkuPit);
   $tikkuY = rand(0 + $tikkuPit, $lev - $tikkuPit);
@@ -53,21 +44,21 @@ for($i = 0; $i < $maara; $i++) {
   }
     
   if($rist) imageline($kuva, $tikkuX, $tikkuY, $tikkuX2, $tikkuY2, $kel);
-  else imageline($kuva, $tikkuX, $tikkuY, $tikkuX2, $tikkuY2, $vih);
-  
+  else imageline($kuva, $tikkuX, $tikkuY, $tikkuX2, $tikkuY2, $vih);  
 }
 
 imagerectangle($kuva, $tikkuPit, $tikkuPit, $lev - $tikkuPit, $lev - $tikkuPit, $har);
-// imagerectangle($kuva, 50, 50, 400, 400, $mus);
-
-$todnak = $risteavat / $maara;
 
 imagefilledrectangle($kuva, 0, $lev, $lev, $kor, $vih);
 
-$kissa = "Olen kissojen kauhu";
+$todnak = $risteavat / $maara;
+$fontti = "Inconsolata-Bold.ttf";
 
-kirjoita($kuva, 550, "Risteavat tikut: {$risteavat}", $mus);
-kirjoita($kuva, 570, "Todennakoisyys: {$risteavat} / {$maara} =  {$todnak}", $mus);
+$teksti = "Risteävät tikut: {$risteavat}";
+imagettftext($kuva, 13, 0, 30, 550, $mus, $fontti, $teksti);
+$teksti = "Todennäköisyys: {$risteavat} / {$maara} = {$todnak}";
+imagettftext($kuva, 13, 0, 30, 570, $mus, $fontti, $teksti);
+
 
 header("Content-Type:image/png");
 imagepng($kuva);
