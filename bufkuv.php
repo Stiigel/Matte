@@ -20,8 +20,9 @@ $lautLev = 80;
 $viivat = [];
 
 for($i = 0; $i < $lev/$lautLev; $i++) {
-  array_push($viivat, $i * $lautLev); 
-  imageline($kuva, 0, $i * $lautLev, $lev, $i * $lautLev, $pun);
+  $y = $i * $lautLev + 10;
+  array_push($viivat, $y); 
+  imageline($kuva, 0, $y, $lev, $y, $pun);
 }
 
 for($i = 0; $i < $maara; $i++) {  
@@ -29,17 +30,17 @@ for($i = 0; $i < $maara; $i++) {
   $tikkuX = rand($tikkuPit, $lev - $tikkuPit);
   $tikkuY = rand($tikkuPit, $lev - $tikkuPit);
 //   628318530
-  $tikkuRad = mt_rand(0, 314159265) / 100000000;
+  $tikkuRad = mt_rand(0, 628318530) / 100000000;
   $tikkuX2 = $tikkuX + (cos($tikkuRad) * $tikkuPit);
   $tikkuY2 = $tikkuY + (sin($tikkuRad) * $tikkuPit);
   
   $rist = false;
   foreach( $viivat as $viiva) {
-    if( $tikkuY > $viiva && $tikkuY2 < $viiva) {
+    if( $tikkuY >= $viiva && $tikkuY2 <= $viiva) {
       $risteavat++;
       $rist = true;
     }
-    else if ( $tikkuY2 > $viiva && $tikkuY < $viiva) {
+    else if ( $tikkuY2 >= $viiva && $tikkuY <= $viiva) {
       $risteavat++;
       $rist = true;
     }
@@ -53,7 +54,7 @@ imagerectangle($kuva, $tikkuPit, $tikkuPit, $lev - $tikkuPit, $lev - $tikkuPit, 
 
 imagefilledrectangle($kuva, 0, $lev, $lev, $kor, $vih);
 
-$todnak = number_format($risteavat / $maara, 2);
+$todnak = number_format($risteavat / $maara, 5);
 $fontti = "Inconsolata-Bold.ttf";
 
 imagettftext($kuva, 20, -5, 120, 530, $mus, $fontti, "Tikun heitto ohjelma");
