@@ -3,7 +3,9 @@
 
 $lev = 500;
 $kor = 650;
-$maara = 25;
+
+if (isset($_REQUEST["maara"])) $maara = $_REQUEST["maara"];
+else $maara = 25;
 
 $kuva = imagecreate($lev, $kor);
 $tausta = imagecolorallocate($kuva, 32, 99, 199);
@@ -24,9 +26,9 @@ for($i = 0; $i < $lev/$lautLev; $i++) {
 
 for($i = 0; $i < $maara; $i++) {  
   $tikkuPit = $lautLev/2;
-  $tikkuX = rand(0 + $tikkuPit, $lev - $tikkuPit);
-  $tikkuY = rand(0 + $tikkuPit, $lev - $tikkuPit);
-
+  $tikkuX = rand($tikkuPit, $lev - $tikkuPit);
+  $tikkuY = rand($tikkuPit, $lev - $tikkuPit);
+//   628318530
   $tikkuRad = mt_rand(0, 314159265) / 100000000;
   $tikkuX2 = $tikkuX + (cos($tikkuRad) * $tikkuPit);
   $tikkuY2 = $tikkuY + (sin($tikkuRad) * $tikkuPit);
@@ -51,13 +53,14 @@ imagerectangle($kuva, $tikkuPit, $tikkuPit, $lev - $tikkuPit, $lev - $tikkuPit, 
 
 imagefilledrectangle($kuva, 0, $lev, $lev, $kor, $vih);
 
-$todnak = $risteavat / $maara;
+$todnak = number_format($risteavat / $maara, 2);
 $fontti = "Inconsolata-Bold.ttf";
 
+imagettftext($kuva, 20, -5, 120, 530, $mus, $fontti, "Tikun heitto ohjelma");
 $teksti = "Risteävät tikut: {$risteavat}";
-imagettftext($kuva, 13, 0, 30, 550, $mus, $fontti, $teksti);
+imagettftext($kuva, 13, 0, 50, 580, $mus, $fontti, $teksti);
 $teksti = "Todennäköisyys: {$risteavat} / {$maara} = {$todnak}";
-imagettftext($kuva, 13, 0, 30, 570, $mus, $fontti, $teksti);
+imagettftext($kuva, 13, 0, 50, 600, $mus, $fontti, $teksti);
 
 
 header("Content-Type:image/png");
