@@ -7,6 +7,13 @@ def enc_print(string='', koodaus='utf-8'):
 
 cgitb.enable()
 
+formi = cgi.FieldStorage()
+
+try:
+  heittoMaara = int(formi["maara"].value)
+except:
+  heittoMaara = 25
+
 enc_print('Content-Type: text/html\n\n')
 enc_print("""
 <!DOCTYPE html>
@@ -107,8 +114,7 @@ def valehtele(luku):
   
   #1 2 3 4 5 6 7 8 9 0 1
   #1 1 1 1 1 1 2 3 4 5 6
-  
-heittoMaara = 25
+
 mahdMaara = 36
 vitoset = 0
 ylKolmet = 0
@@ -120,7 +126,6 @@ enc_print('Tilastoll. TN: %i / %i = %.2f<br>' % (vitoset, heittoMaara, vitoset/h
 
 tulosta_taulu(5, 5)
 
-
 enc_print('<h3>Anakin toinen yli kolme: %i </h3>' % ylKolmet )
 enc_print('Tilastoll. TN: %i / %i = %.2f <br>' % (ylKolmet, heittoMaara, ylKolmet/heittoMaara))
 
@@ -128,6 +133,7 @@ tulosta_taulu(3, 6)
 
 enc_print("""
     <br>
-    <a href="noppa.py">¡Heitä uudestaan!</a>
+    <a href="noppa.py">¡Heitä uudestaan!</a><br>
+    <a href="https://github.com/Stiigel/Matte/blob/master/noppa.py">Sorsat</a>
   </body>
 </html>""")
