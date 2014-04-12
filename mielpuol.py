@@ -53,7 +53,6 @@ bTois = pow(b, 2)
 disk = bTois - diskLop
 ala = 2 * a
 
-
 enc_print('x = -%i &plusmn; sqrt( %i - %i ) / %i<br>' % (b, bTois, diskLop, ala))
 
 if ala == 0:
@@ -71,6 +70,8 @@ elif disk == 0:
   vast = -b / ala
   if vast == int(vast):
     enc_print('x = %i' % vast)
+  else:
+    enc_print('x &asymp; %f' % vast)
 
 else:
   sqrtDisk = math.sqrt(disk)
