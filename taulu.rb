@@ -8,8 +8,11 @@ puts "
     <title>¡Jag harn't ont i magen</title>
     <meta charset=\"utf-8\">
     <style>
-    div { float:left;}
-    table { border-collapse:collapse}
+    div {
+      float:left;
+      margin-right:5%;
+    }
+    table { border-collapse:collapse;}
     td {
       width:14pt;
       height:14pt;
@@ -18,7 +21,7 @@ puts "
     .s1{ background-color:#AAA;}
     .s2{ background-color:#4A9;}
     .s3{ background-color:#28F;}
-    .s4{ background-color:#A82;}
+    .s4{ background-color:#A90;}
     .s5{ background-color:#A28;}
     
     </style>
@@ -31,8 +34,7 @@ alat = []
 sivu = 1
 edellAlat = 0
 ala = 0
-kokoAla = 9 * 9
-    
+kokoAla = 9 * 9  
 
 i = 5
 while i > 0
@@ -45,16 +47,14 @@ while i > 0
   sivu += 2  
   i -= 1
 end
-
 puts "<br>"
-tnt = []
-E = 0
 
+E = 0
 for i in 1..5
   tn = alat[i] / kokoAla.to_f
   E += i * tn
   
-  puts "#{i}. tn: #{tn.round(3)}<br>"
+  puts "#{i}. tn: #{alat[i]} / #{kokoAla} = #{tn.round(3)}<br>"
 end
 
 puts "<br> E(Pistemäärä) = #{E.round(3)}"
