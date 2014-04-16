@@ -5,47 +5,56 @@ puts "
 <!DOCTYPE html>
 <html>
   <head>
-    <title>¡Jag harn't ont i magen</title>
+    <title>¡Jag harn't ont i magen!</title>
     <meta charset=\"utf-8\">
     <style>
+    body {
+      background-color: #000;
+      color:#8FA;
+      font-size:12pt;
+    }
     div {
       float:left;
       margin-right:5%;
     }
-    table { border-collapse:collapse;}
+    table { 
+      border-collapse:collapse;
+      float:left;
+    }
     td {
+      text-align:center;
       width:14pt;
       height:14pt;
-      color:#001;
+      color:#303;
     }
-    .s1{ background-color:#AAA;}
-    .s2{ background-color:#4A9;}
-    .s3{ background-color:#28F;}
-    .s4{ background-color:#A90;}
-    .s5{ background-color:#A28;}
+    img { width: 200pt; }
+    
+    .s1{ background-color:#AC8;}
+    .s2{ background-color:#AA6;}
+    .s3{ background-color:#A84;}
+    .s4{ background-color:#A62;}
+    .s5{ background-color:#A20;}
     
     </style>
   </head>
   <body>
+  <h1>Harpin tauluun heitto ohjelma</h1>
+  <h2>Mutta ei kuitenkaan ihan</h2>
   <div>"
 
 alat = []
-
-sivu = 1
-edellAlat = 0
-ala = 0
+sivu = 9
 kokoAla = 9 * 9  
 
-i = 5
-while i > 0
-  edellAlat += ala  
-  ala = (sivu * sivu) - edellAlat 
-  alat[i] = ala
-  
-  puts "#{i}. ala: #{ala}<br>"
-  
-  sivu += 2  
-  i -= 1
+for i in 1..5
+  seurSivu = sivu - 2  
+  if i == 5
+    seurSivu = 0
+  end  
+ 
+  alat[i] = (sivu * sivu) - (seurSivu * seurSivu)
+  puts "A<sub>#{i}</sub>: #{alat[i]}<br>"
+  sivu = seurSivu
 end
 puts "<br>"
 
@@ -54,11 +63,11 @@ for i in 1..5
   tn = alat[i] / kokoAla.to_f
   E += i * tn
   
-  puts "#{i}. tn: #{alat[i]} / #{kokoAla} = #{tn.round(3)}<br>"
+  puts "TN<sub>#{i}</sub>: #{alat[i]} / #{kokoAla} = #{tn.round(3)}<br>"
 end
 
-puts "<br> E(Pistemäärä) = #{E.round(3)}"
-
+puts "<br> E(Pistemäärä) = #{E.round(3)}<br>"
+puts "<a href=\"https://github.com/Stiigel/Matte/blob/master/taulu.rb\">sorsat</a>"
 puts "</div>"
 
 puts "<table>"
@@ -73,5 +82,6 @@ end
 puts "</table>"
   
 puts "
+  <img src=\"harp.png\" alt=\"harp\">
   </body>
 </html>"
